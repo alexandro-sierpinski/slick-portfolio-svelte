@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { Item, Skill } from '$lib/types';
+import type { Language } from '$lib/stores/languages';
 
 dayjs.extend(duration);
 
@@ -20,23 +21,19 @@ export const countMonths = (from: Date, to: Date = new Date()): number => {
 	return firstYear + wholeYears + newYear + 1;
 };
 
-export const getMonthName = (index: number): string => {
-	const monthNames = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
-	];
+export const getMonthName = (month: number, language: Language = 'en-US'): string => {
+	const translations = {
+		'pt-BR': [
+			'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+			'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+		],
+		'en-US': [
+			'January', 'February', 'March', 'April', 'May', 'June',
+			'July', 'August', 'September', 'October', 'November', 'December'
+		]
+	};
 
-	return monthNames[index];
+	return translations[language][month];
 };
 
 export const useImage = (url: string, base: string): string => `${base}${url}`;

@@ -63,6 +63,21 @@ const projectsList = [
 				src: 'https://images.unsplash.com/photo-1585079542156-2755d9c8a094?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHByb2dyYW1taW5nfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
 			}
 		]
+	},
+	{
+		slug: 'completed-project',
+		color: '#4CAF50',  // cor verde
+		description: 'Um projeto exemplo que já foi concluído.',
+		shortDescription: 'Um projeto exemplo que já foi concluído.',
+		links: [{ to: 'https://github.com/example/completed', label: 'GitHub' }],
+		logo: Assets.TypeScript,
+		name: 'Projeto Concluído',
+		period: {
+			from: new Date('2023-01-01'),
+			to: new Date('2023-12-31')  // Data de término definida = projeto concluído
+		},
+		skills: getSkills('ts', 'svelte', 'sass'),
+		type: 'Website Template'
 	}
 ] as const;
 

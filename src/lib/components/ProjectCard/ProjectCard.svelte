@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { computeExactDuration, countMonths, getMonthName } from '$lib/utils/helpers';
+	import { currentLanguage, translations } from '$lib/stores/languages';
 	import Chip from '../Chip/Chip.svelte';
 	import Card from '../Card/Card.svelte';
 	import CardTitle from '../Card/CardTitle.svelte';
@@ -20,10 +21,10 @@
 	// 	project.period.to ?? new Date(Date.now() + 1000 * 60 * 60 * 24)
 	// )}`;
 	$: period = computeExactDuration(project.period.from, project.period.to);
-	$: from = `${getMonthName(project.period.from.getMonth())} ${project.period.from.getFullYear()}`;
+	$: from = `${getMonthName(project.period.from.getMonth(), $currentLanguage)} ${project.period.from.getFullYear()}`;
 	$: to = project.period.to
-		? `${getMonthName(project.period.to.getMonth())} ${project.period.to.getFullYear()}`
-		: 'now';
+		? translations[$currentLanguage].project.status.completed
+		: translations[$currentLanguage].project.status.ongoing;
 </script>
 
 <Card color={project.color} href={`${base}/projects/${project.slug}`}>
@@ -40,7 +41,7 @@
 	<div class="col m-b-15px justify-between text-[var(--secondary-text)] text-0.85em">
 		<div class="row items-center gap-2">
 			<UIcon icon="i-carbon-assembly-cluster" classes="text-1.25em" />
-			<p>{project.type}</p>
+			<p>{translations[$currentLanguage].project.websiteTemplate}</p>
 		</div>
 		<CardDivider />
 		<div class="row items-center gap-2">

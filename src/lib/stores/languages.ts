@@ -52,8 +52,20 @@ export const translations = {
             search: 'Buscar',
             websiteTemplate: 'Template de Website',
             description: 'Um template de portfólio de desenvolvedor estilo Vercel feito com Typescript e SvelteKit.',
-            shortDescription: 'Um template de portfólio de desenvolvedor estilo Vercel feito com Typescript e SvelteKit.'
-        }
+            shortDescription: 'Um template de portfólio de desenvolvedor estilo Vercel feito com Typescript e SvelteKit.',
+            status: {
+                ongoing: 'em andamento',
+                completed: 'concluído'
+            },
+            months: {
+                0: 'Janeiro',
+                1: 'Fevereiro',
+            }
+        },
+        common: {
+            search: 'Buscar...',
+            searchPlaceholder: 'buscar'
+        },
     },
     'en-US': {
         home: {
@@ -91,7 +103,19 @@ export const translations = {
             search: 'Search',
             websiteTemplate: 'Website Template',
             description: 'A Vercel-like developer portfolio website template made with Typescript and SvelteKit.',
-            shortDescription: 'A Vercel-like developer portfolio website template made with Typescript and SvelteKit.'
-        }
+            shortDescription: 'A Vercel-like developer portfolio website template made with Typescript and SvelteKit.',
+            status: {
+                ongoing: 'ongoing',
+                completed: 'completed'
+            },
+            months: {
+                0: 'January',
+                1: 'February',
+            }
+        },
+        common: {
+            search: 'Search...',
+            searchPlaceholder: 'search'
+        },
     }
 } as const;

@@ -1,8 +1,11 @@
 import Assets from './assets';
 import { getSkills } from './skills';
 import type { Project } from '../types';
+import { derived } from 'svelte/store';
+import { currentLanguage, translations } from '$lib/stores/languages';
 
-export const items: Array<Project> = [
+// Definir os projetos
+const projectsList = [
 	{
 		slug: 'slick-portfolio-angular',
 		color: '#5e95e3',
@@ -61,6 +64,25 @@ export const items: Array<Project> = [
 			}
 		]
 	}
-];
+] as const;
+
+// Criar um store derivado que atualiza quando o idioma muda
+export const items = derived(currentLanguage, ($currentLanguage) => 
+	projectsList.map(project => ({
+		...project,
+		title: translations[$currentLanguage].project.websiteTemplate,
+		description: translations[$currentLanguage].project.description,
+		shortDescription: translations[$currentLanguage].project.shortDescription
+	}))
+);
+
+// Função para buscar projetos
+export const searchProjects = (query: string) => {
+	return derived(items, ($items) => 
+		$items.filter((item) => 
+			!query.trim() || item.title.toLowerCase().includes(query.trim().toLowerCase())
+		)
+	);
+};
 
 export const title = 'Projects';

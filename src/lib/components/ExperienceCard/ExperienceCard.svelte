@@ -10,6 +10,7 @@
 	import UIcon from '../Icon/UIcon.svelte';
 	import Chip from '../Chip/Chip.svelte';
 	import CardDivider from '../Card/CardDivider.svelte';
+	import { translations } from '$lib/stores/languages';
 
 	export let experience: Experience;
 
@@ -30,6 +31,9 @@
 		{ label: experience.location, icon: 'i-carbon-location' },
 		{ label: experience.contract, icon: 'i-carbon-hourglass' }
 	] as const;
+
+	$: description = $translations.experience.description;
+	$: shortDescription = $translations.experience.shortDescription;
 </script>
 
 <Card
@@ -68,7 +72,7 @@
 				</div>
 				<CardDivider />
 			</div>
-			<div class="experience-description text-[0.9em]">{experience.shortDescription}</div>
+			<div class="experience-description text-[0.9em]">{shortDescription}</div>
 			<div class="flex flex-row flex-wrap mt-5">
 				{#each experience.skills as skill}
 					<ChipIcon

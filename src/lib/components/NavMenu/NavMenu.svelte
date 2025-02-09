@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { theme, toggleTheme } from '$lib/stores/theme';
 	import { items } from '@data/navbar';
+     import { currentLanguage, type Language } from '$lib/stores/languages';
 	import * as HOME from '@data/home';
 
 	import { base } from '$app/paths';
@@ -11,6 +12,8 @@
 
 	let expanded = false;
 
+	const languages: Language[] = ['pt-BR', 'en-US'];
+	
 	const toggleExpanded = (v?: boolean) => {
 		if (typeof v === 'undefined') {
 			expanded = !expanded;
@@ -18,6 +21,10 @@
 			expanded = v;
 		}
 	};
+
+    function toggleLanguage() {
+        $currentLanguage = $currentLanguage === 'pt-BR' ? 'en-US' : 'pt-BR';
+    }
 </script>
 
 <div class="nav-menu">
@@ -37,7 +44,7 @@
 			{HOME.lastName}
 		</div>
 		<div class="flex-row flex-1 self-center h-full justify-center hidden md:flex">
-			{#each items as item (item.title)}
+			{#each $items as item (item.to)}
 				<a href={`${base}${item.to}`} class="nav-menu-item !text-[var(--secondary-text)]">
 					<UIcon icon={item.icon} classes="text-1.3em" />
 					<span class="nav-menu-item-label">{item.title}</span>
@@ -64,6 +71,12 @@
 						<UIcon icon="i-carbon-sun" />
 					{/if}
 				</button>
+				<button
+					class="bg-transparent text-1em border-none cursor-pointer hover:bg-[color:var(--main-hover)] text-[var(--secondary-text)] px-2" 
+				    on:click={toggleLanguage}
+				>
+					{$currentLanguage === 'pt-BR' ? '🇧🇷' : '🇺🇸'}
+				</button>
 			</div>
 			<div class="col-center md:hidden h-full hover:bg-[var(--main-hover)] cursor-pointer">
 				<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -78,7 +91,7 @@
 	</nav>
 	<div class={`nav-menu-mobile ${expanded ? 'nav-menu-mobile-open' : ''} md:hidden`}>
 		<div class="flex-col flex-1 self-center h-full justify-center m-t-7">
-			{#each items as item}
+			{#each $items as item}
 				<a
 					href={`${base}${item.to}`}
 					class="nav-menu-item !text-[var(--secondary-text)] gap-5"
@@ -134,9 +147,13 @@
 			display: flex;
 			align-items: center;
 			border-bottom: 3px solid transparent;
+			width: 140px;
+			justify-content: center;
 
 			&-label {
 				margin-left: 10px;
+				width: 90px;
+				text-align: left;
 
 				@media (max-width: 950px) {
 					& {
@@ -167,6 +184,25 @@
 		&-open {
 			opacity: 1;
 			transform: translateY(0vh);
+		}
+	}
+
+	.nav-item {
+		min-width: 100px;
+		text-align: center;
+		white-space: nowrap;
+		padding: 0 10px;
+	}
+
+	@media (max-width: 768px) {
+		.nav-item {
+			min-width: 80px;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.nav-item {
+			min-width: auto;
 		}
 	}
 </style>

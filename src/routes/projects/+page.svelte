@@ -17,9 +17,9 @@
 		isSelected?: boolean;
 	}
 
-	let filters: Array<SkillFilter> = skills.items.filter((it) => {
+	let filters: Array<SkillFilter> = Array.isArray(skills.items) ? skills.items.filter((it) => {
 		return $items.some((project) => project.skills.some((skill) => skill.slug === it.slug));
-	});
+	}) : [];
 
 	let search = '';
 	let result = $items;
@@ -39,7 +39,7 @@
 	};
 
 	$: {
-		result = $items.filter((project) => {
+		result = Array.isArray($items) ? $items.filter((project) => {
 			const isFiltered =
 				filters.every((item) => !item.isSelected) ||
 				project.skills.some((tech) =>
@@ -51,14 +51,14 @@
 				project.name.trim().toLowerCase().includes(search.trim().toLowerCase());
 
 			return isFiltered && isSearched;
-		});
+		}) : [];
 	}
 
 	const onSearch = (e: CustomEvent<{ search: string }>) => {
 		const query = e.detail.search.trim().toLowerCase();
-		result = $items.filter(item => 
+		result = Array.isArray($items) ? $items.filter(item => 
 			item.title.toLowerCase().includes(query)
-		);
+		) : [];
 	};
 
 	onMount(() => {

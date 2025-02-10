@@ -36,21 +36,23 @@
 			return [];
 		}
 
-		projects.items.forEach((item) => {
+		Array.isArray(projects.items) ? projects.items.forEach((item) => {
 			if (item.skills.some((tech) => tech.slug === skill.slug)) {
 				out.push({
 					img: getAssetURL(item.logo),
 					display: `${item.name} (${item.type})`,
 					name: item.name,
 					type: 'projects',
+
 					url: `/projects/${item.slug}`
 				});
 			}
-		});
+		}) : [];
 
-		experiences.items.forEach((item) => {
+		Array.isArray(experiences.items) ? experiences.items.forEach((item) => {
 			if (item.skills.some((tech) => tech.slug === skill.slug)) {
 				out.push({
+
 					img: getAssetURL(item.logo),
 					display: `${item.name} @ ${item.company}`,
 					name: item.name,
@@ -58,7 +60,7 @@
 					url: `/experience/${item.slug}`
 				});
 			}
-		});
+		}) : [];
 
 		return out;
 	};

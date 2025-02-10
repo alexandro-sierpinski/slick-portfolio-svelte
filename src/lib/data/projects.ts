@@ -93,10 +93,10 @@ export const items = derived(currentLanguage, ($currentLanguage) =>
 
 // Função para buscar projetos
 export const searchProjects = (query: string) => {
-	return derived(items, ($items) => 
-		$items.filter((item) => 
+	return derived(items, ($items) =>  
+		Array.isArray($items) ? $items.filter((item) => 
 			!query.trim() || item.title.toLowerCase().includes(query.trim().toLowerCase())
-		)
+		) : []
 	);
 };
 

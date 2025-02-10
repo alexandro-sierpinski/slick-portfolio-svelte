@@ -10,7 +10,7 @@
 	import UIcon from '../Icon/UIcon.svelte';
 	import Chip from '../Chip/Chip.svelte';
 	import CardDivider from '../Card/CardDivider.svelte';
-	import { translations } from '$lib/stores/languages';
+	import { currentLanguage, translations } from '$lib/stores/languages';
 
 	export let experience: Experience;
 
@@ -18,22 +18,29 @@
 	const exactDuration = computeExactDuration(experience.period.from, experience.period.to);
 
 	const from = `${getMonthName(
-		experience.period.from.getMonth()
+		experience.period.from.getMonth(),
+		$currentLanguage
 	)} ${experience.period.from.getFullYear()}`;
 	const to = experience.period.to
-		? `${getMonthName(experience.period.to.getMonth())} ${experience.period.to.getFullYear()}`
-		: 'Present';
+		? `${getMonthName(experience.period.to.getMonth(), $currentLanguage)} ${experience.period.to.getFullYear()}`
+		: translations[$currentLanguage].experience.present;
 
 	const period = `${from} - ${to}`;
 
 	$: info = [
 		{ label: experience.company, icon: 'i-carbon-building' },
-		{ label: experience.location, icon: 'i-carbon-location' },
-		{ label: experience.contract, icon: 'i-carbon-hourglass' }
+		{ 
+			label: translations[$currentLanguage].experience.location[experience.location], 
+			icon: 'i-carbon-location' 
+		},
+		{ 
+			label: translations[$currentLanguage].experience.contract[experience.contract], 
+			icon: 'i-carbon-hourglass' 
+		}
 	] as const;
 
-	$: description = $translations.experience.description;
-	$: shortDescription = $translations.experience.shortDescription;
+	$: description = translations[$currentLanguage].experience.description;
+	$: shortDescription = translations[$currentLanguage].experience.shortDescription;
 </script>
 
 <Card

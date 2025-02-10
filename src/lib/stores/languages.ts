@@ -66,6 +66,61 @@ export const translations = {
             search: 'Buscar...',
             searchPlaceholder: 'buscar'
         },
+        experience: {
+            title: 'Experiência',
+            notFound: 'Nenhuma experiência encontrada...',
+            current: 'Atual',
+            years: 'anos',
+            months: 'meses',
+            present: 'Presente',
+            description: 'Descrição da experiência em português',
+            shortDescription: 'Descrição curta da experiência em português',
+            contract: {
+                selfEmployed: 'Autônomo',
+                fullTime: 'Tempo Integral',
+                freelancer: 'Freelancer'
+            },
+            location: {
+                home: 'Home Office',
+                hybrid: 'Híbrido',
+                office: 'Escritório'
+            }
+        },
+        education: {
+            title: 'Educação',
+            notFound: 'Nenhuma formação encontrada...',
+            degree: {
+                bachelor: 'Bacharelado em',
+                master: 'Mestrado em',
+                phd: 'Doutorado em',
+                certificate: 'Certificado em'
+            },
+            computerScience: 'Ciência da Computação',
+            location: {
+                onSite: 'Presencial',
+                remote: 'Remoto',
+                hybrid: 'Híbrido'
+            },
+            status: {
+                ongoing: 'Em andamento',
+                completed: 'Concluído'
+            },
+            subjects: {
+                algorithm: 'Algoritmos',
+                algebra: 'Álgebra',
+                python: 'Python',
+                cpp: 'C++',
+                java: 'Java',
+                english: 'Inglês',
+                assembly: 'Assembly',
+                rust: 'Rust'
+            }
+        },
+        resume: {
+            title: 'Currículo',
+            download: 'Baixar',
+            notFound: 'Ops! Nenhum currículo disponível no momento.'
+        }
     },
     'en-US': {
         home: {
@@ -117,5 +172,60 @@ export const translations = {
             search: 'Search...',
             searchPlaceholder: 'search'
         },
+        experience: {
+            title: 'Experience',
+            notFound: 'No experience found...',
+            current: 'Current',
+            years: 'years',
+            months: 'months',
+            present: 'Present',
+            description: 'Experience description in English',
+            shortDescription: 'Short experience description in English',
+            contract: {
+                selfEmployed: 'Self-employed',
+                fullTime: 'Full-time',
+                freelancer: 'Freelancer'
+            },
+            location: {
+                home: 'Home Office',
+                hybrid: 'Hybrid',
+                office: 'Office'
+            }
+        },
+        education: {
+            title: 'Education',
+            notFound: 'No education found...',
+            degree: {
+                bachelor: 'Bachelor degree of',
+                master: 'Master degree of',
+                phd: 'PhD in',
+                certificate: 'Certificate in'
+            },
+            computerScience: 'Computer Science',
+            location: {
+                onSite: 'On-site',
+                remote: 'Remote',
+                hybrid: 'Hybrid'
+            },
+            status: {
+                ongoing: 'Ongoing',
+                completed: 'Completed'
+            },
+            subjects: {
+                algorithm: 'Algorithm',
+                algebra: 'Algebra',
+                python: 'Python',
+                cpp: 'C++',
+                java: 'Java',
+                english: 'English',
+                assembly: 'Assembly',
+                rust: 'Rust'
+            }
+        },
+        resume: {
+            title: 'Resume',
+            download: 'Download',
+            notFound: 'Oops! No resume available at the moment.'
+        }
     }
 } as const;

@@ -2,12 +2,19 @@ import { Platform } from '$lib/types';
 import { getSkills } from './skills';
 import { derived } from 'svelte/store';
 import { currentLanguage, translations } from '$lib/stores/languages';
+import { get } from 'svelte/store';
 
-export const title = 'title';
+export const title = get(derived(
+	currentLanguage,
+	($currentLanguage) => translations[$currentLanguage].navbar.home
+));
+
+console.log(title);
 
 export const name = 'Alexandro';
 
 export const lastName = 'Sierpinski';
+
 
 export const description = derived(
 	currentLanguage,

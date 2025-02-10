@@ -115,7 +115,7 @@ export const title = 'Skills';
 
 export const getSkills = (
 	...slugs: Array<StringWithAutoComplete<(typeof items)[number]['slug']>>
-): Array<Skill> => items.filter((it) => slugs.includes(it.slug));
+): Array<Skill> => Array.isArray(items) ? items.filter((it) => slugs.includes(it.slug)) : [];
 
 type GroupedSkills = Array<{ category: SkillCategory; items: Array<Skill> }>;
 
@@ -125,7 +125,7 @@ export const groupByCategory = (query: string): GroupedSkills => {
 	const others: Array<Skill> = [];
 	const currentCategories = getTranslatedCategories();
 
-	items.forEach((item) => {
+	 Array.isArray(items) ? items.forEach((item) => {
 		if (query.trim() && !item.name.toLowerCase().includes(query.trim().toLowerCase())) return;
 
 		if (!item.category) {
@@ -142,7 +142,7 @@ export const groupByCategory = (query: string): GroupedSkills => {
 		}
 
 		category.items.push(item);
-	});
+	}) : [];
 
 	if (others.length !== 0) {
 		out.push({ 

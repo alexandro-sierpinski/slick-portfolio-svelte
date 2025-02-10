@@ -4,20 +4,18 @@
 	import UIcon from '$lib/components/Icon/UIcon.svelte';
 	import SearchPage from '$lib/components/SearchPage.svelte';
 	import { getAssetURL } from '$lib/data/assets';
-
+	import { currentLanguage, translations } from '$lib/stores/languages';
 	import { title, items } from '@data/education';
 	import type { Education } from '$lib/types';
-	import { computeExactDuration, getTimeDiff } from '$lib/utils';
+	import { computeExactDuration } from '$lib/utils';
 	import CardDivider from '$lib/components/Card/CardDivider.svelte';
 
 	let search = '';
-
 	let result: Array<Education> = items;
 
 	const onSearch = (ev: CustomEvent<{ search: string }>) => {
 		const s = ev.detail.search;
-
-		result = items.filter((it) => {
+		result = Array.isArray(items) ? items.filter((it) => {
 			return (
 				it.degree.toLowerCase().includes(s) ||
 				it.description.toLowerCase().includes(s) ||
@@ -26,16 +24,16 @@
 				it.organization.toLowerCase().includes(s) ||
 				it.subjects.some((it) => it.toLowerCase().includes(s))
 			);
-		});
+		}) : [];
 	};
 </script>
 
-<SearchPage {title} {search} on:search={onSearch}>
+<SearchPage title={translations[$currentLanguage].education.title} {search} on:search={onSearch}>
 	<div class="col items-center relative mt-10 flex-1">
 		{#if result.length === 0}
 			<div class="p-5 col-center gap-3 m-y-auto text-[var(--accent-text)] flex-1">
-				<UIcon icon="i-carbon-development" classes="text-3.5em" />
-				<p class="font-300">Could not find anything...</p>
+				<UIcon icon="i-carbon-education" classes="text-3.5em" />
+				<p class="font-300">{translations[$currentLanguage].education.notFound}</p>
 			</div>
 		{:else}
 			<div
@@ -61,13 +59,15 @@
 									width="50"
 									class="mb-5"
 								/>
-								<div class="text-[1.3em]">{education.degree}</div>
+								<div class="text-[1.3em]">
+									{translations[$currentLanguage].education.degree[education.degree]} {translations[$currentLanguage].education.computerScience}
+								</div>
 								<div>{education.organization}</div>
 								<div class="col text-[0.9em]">
 									<CardDivider />
 									<div class="row items-center gap-2">
 										<UIcon icon="i-carbon-location" />
-										{education.location}
+										{translations[$currentLanguage].education.location[education.location]}
 									</div>
 									<CardDivider />
 									<div class="row items-center gap-2">
@@ -78,7 +78,7 @@
 								</div>
 								<div class="row flex-wrap gap-1">
 									{#each education.subjects as subject}
-										<Chip>{subject}</Chip>
+										<Chip>{translations[$currentLanguage].education.subjects[subject]}</Chip>
 									{/each}
 								</div>
 							</div>
@@ -89,3 +89,10 @@
 		{/if}
 	</div>
 </SearchPage>
+
+<style lang="scss">
+.education-list {
+	display: grid;
+	gap: 20px;
+}
+</style>

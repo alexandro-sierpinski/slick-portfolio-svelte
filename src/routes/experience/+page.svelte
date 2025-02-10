@@ -17,21 +17,21 @@
 			return;
 		}
 
-		result = items.filter(
+		result 	= Array.isArray(items) ? items.filter(
 			(it) =>
 				it.name.toLowerCase().includes(query) ||
 				it.company.toLowerCase().includes(query) ||
 				it.description.toLowerCase().includes(query)
-		);
+		) : [];
 	};
 </script>
 
-<SearchPage title={$translations.experience.title} on:search={onSearch}>
+<SearchPage title={translations[$currentLanguage].experience.title} on:search={onSearch}>
 	<div class="col items-center relative mt-10 flex-1">
 		{#if result.length === 0}
 			<div class="p-5 col-center gap-3 m-y-auto text-[var(--accent-text)] flex-1">
 				<UIcon icon="i-carbon-development" classes="text-3.5em" />
-				<p class="font-300">{$translations.experience.notFound}</p>
+				<p class="font-300">{translations[$currentLanguage].experience.notFound}</p>
 			</div>
 		{:else}
 			<div

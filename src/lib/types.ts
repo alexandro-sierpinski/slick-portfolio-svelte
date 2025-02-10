@@ -63,19 +63,27 @@ export interface Project<S extends string = string> extends Item<S> {
 	skills: Array<Skill<S>>;
 }
 
+export type EducationLocation = 'onSite' | 'remote' | 'hybrid';
+export type ExperienceLocation = 'home' | 'hybrid' | 'office';
+export type ExperienceContract = 'selfEmployed' | 'fullTime' | 'freelancer';
+
 export interface Experience<S extends string = string> extends Project<S> {
 	company: string;
-	location: string;
-	contract: ContractType;
+	location: ExperienceLocation;
+	contract: ExperienceContract;
 }
+
+export type EducationSubject = 'algorithm' | 'algebra' | 'python' | 'cpp' | 'java' | 'english' | 'assembly' | 'rust';
+
+export type EducationDegree = 'bachelor' | 'master' | 'phd' | 'certificate';
 
 export interface Education<S extends string = string> extends Item<S> {
 	organization: string;
-	location: string;
+	location: EducationLocation;
 	period: {
 		from: Date;
 		to?: Date;
 	};
-	subjects: Array<string>;
-	degree: string;
+	subjects: Array<EducationSubject>;
+	degree: EducationDegree;
 }

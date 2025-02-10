@@ -1,18 +1,18 @@
-<script>
-	import { data, title } from '@data/resume';
-
+<script lang="ts">
+	import { data } from '@data/resume';
+	import { currentLanguage, translations } from '$lib/stores/languages';
 	import Chip from '$lib/components/Chip/Chip.svelte';
 	import CommonPage from '$lib/components/CommonPage.svelte';
 </script>
 
-<CommonPage {title}>
+<CommonPage title={translations[$currentLanguage].resume.title}>
 	<div class="resume">
-		{#if data}
-			<a href={data} download>
-				<Chip size={'1.25em'}>Download</Chip>
+		{#if $data}
+			<a href={$data} target="_blank" rel="noopener noreferrer">
+				<Chip size={'1.25em'}>{translations[$currentLanguage].resume.download}</Chip>
 			</a>
 		{:else}
-			<Chip>Ooops! no CV at the moment.</Chip>
+			<Chip>{translations[$currentLanguage].resume.notFound}</Chip>
 		{/if}
 	</div>
 </CommonPage>

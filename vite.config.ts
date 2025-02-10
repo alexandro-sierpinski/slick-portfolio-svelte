@@ -5,7 +5,8 @@ import { defineConfig } from 'vite';
 
 const config: UserConfig = {
 	plugins: [UnoCSS(), sveltekit()],
-	assetsInclude: ['**/*.pdf']
+	assetsInclude: ['**/*.pdf'],
+	base: '/slick-portfolio-svelte'
 };
 
 export default defineConfig(config);

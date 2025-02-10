@@ -1,4 +1,4 @@
-import{A as n}from"./UIcon.ae318d7a.js";import{V as b}from"./scheduler.cbaf7282.js";import{t as i,c as h}from"./languages.ebc8d237.js";const f=`# Svelte\r
+import{A as n}from"./UIcon.e7279679.js";import{V as b}from"./scheduler.cbaf7282.js";import{t as i,c as h}from"./languages.c2178933.js";const f=`# Svelte\r
 \r
 ---\r
 \r
